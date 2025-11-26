@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,9 +25,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GalacticStoreTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    GameListView()
-                }
+                GameListView()
             }
         }
     }
@@ -36,7 +35,8 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GameListView() {
-
+     // todo : change the top app bar color
+    // todo: add notification and setings icon on the top app bar
     Scaffold(
         topBar = {
             TopAppBar(
@@ -51,8 +51,8 @@ fun GameListView() {
         },
 
     ) { innerPadding ->
-        LazyColumn {
-            Text("Olá mundo")
+        Column (modifier = Modifier.padding(innerPadding)){
+            Text( "olá mundo ")
         }
 
     }
