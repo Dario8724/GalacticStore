@@ -28,7 +28,6 @@ fun GameCardItem(){
                 contentDescription = "",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-                    .padding(all = 12.dp)
                     .fillMaxWidth(0.35f)
             )
         Column (
@@ -36,7 +35,8 @@ fun GameCardItem(){
                               .fillMaxWidth()
                               .padding(all = 4.dp)) {
             Text(
-                "Where Winds Meet is an epic Wuxia open-world action-adventure RPG set in ancient China at the tenth century"
+                "Where Winds Meet is an epic Wuxia open-world action-adventure RPG set in ancient China at the tenth century",
+                modifier = Modifier.padding(top = 4.dp)
             )
         }
     }
