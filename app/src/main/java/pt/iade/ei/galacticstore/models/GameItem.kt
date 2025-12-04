@@ -1,14 +1,13 @@
 package pt.iade.ei.galacticstore.models
 
-import android.R
+import androidx.annotation.DrawableRes
 
 data class GameItem (
-    // add items
-    //  search if i should use a var for the image
+    @DrawableRes var gameImage : Int,
     var gameName : String,
     var gameDescription : String,
     var gameItemName : String,
     var itemDescription : String,
-    var itemPrice : String
-    // add more things
+    var itemPrice : String,
+    @DrawableRes var itemImage : Int,
 )

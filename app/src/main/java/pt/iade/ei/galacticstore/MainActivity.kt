@@ -5,6 +5,7 @@
     import androidx.activity.ComponentActivity
     import androidx.activity.compose.setContent
     import androidx.activity.enableEdgeToEdge
+    import androidx.annotation.DrawableRes
     import androidx.compose.foundation.Image
     import androidx.compose.foundation.background
     import androidx.compose.foundation.layout.Arrangement
@@ -158,7 +159,10 @@
     // card for the games
     // i might not need this preview since i directly call it up there
     @Composable
-    fun GameCard(){
+    fun GameCard(
+        gameName : String,
+        @DrawableRes gameImage : Int
+    ){
         Card(
             onClick = {},
             modifier = Modifier.fillMaxWidth(),
@@ -170,7 +174,7 @@
             ){
 
                 Image(
-                    painter = painterResource(R.drawable.where_the_wind_meet),
+                    painter = painterResource(gameImage),
                     contentDescription = "",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxWidth()
@@ -179,7 +183,7 @@
                 Column(modifier = Modifier.align(Alignment.BottomStart)
                 ) {
                     Text(
-                        "Where Winds Meet",
+                        text = gameName,
                         color = Color.White,
                         fontSize = 30.sp)
                 }
@@ -191,6 +195,7 @@
     @Composable
     fun GameCardPreview(){
         GalacticStoreTheme {
-           GameCard()
+           GameCard(gameName = gameItem.gameName,
+               gameImage = gameItem.game)
         }
     }
