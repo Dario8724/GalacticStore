@@ -35,7 +35,7 @@ fun Test(){
     ModalBottomSheet(onDismissRequest = {}, // i don't know what its meant for
      sheetState = rememberModalBottomSheetState()
     ) {
-
+        TestContent()
     }
 }
 
