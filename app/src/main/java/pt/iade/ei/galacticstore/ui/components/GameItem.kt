@@ -1,5 +1,6 @@
 package pt.iade.ei.galacticstore.ui.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pt.iade.ei.galacticstore.R
 import pt.iade.ei.galacticstore.ui.theme.GalacticStoreTheme
+
+@Composable
+fun GameItem(
+    @DrawableRes gameImage : Int,
+    gameDescription : String
+){
+
+}
+
 
 @Composable
 fun GameCardItem(){

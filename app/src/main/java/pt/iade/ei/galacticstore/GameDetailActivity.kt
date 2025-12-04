@@ -39,6 +39,7 @@ import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -125,8 +126,10 @@ fun GameDetailView() {
         ) { innerPadding ->
         Column (
             modifier = Modifier
+            //  .background(color = Color.Black)
                 .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()
+                    )
         ){
             Row {
                 GameCardItem()
@@ -150,13 +153,18 @@ fun GameDetailView() {
 // change function's name
 @Composable
 fun GameCheck(){
-    Card {
+    Card(
+        colors = CardDefaults.cardColors(
+                containerColor = Color.White
+        )
+    ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Column {
                 Image(painter = painterResource(R.drawable.helm),
                     contentDescription = "",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier.size(150.dp, 150.dp))
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.clip(RoundedCornerShape(16.dp))
+                        .size(150.dp, 150.dp))
             }
             Column (modifier = Modifier.padding(all = 6.dp)){
                 Row {
