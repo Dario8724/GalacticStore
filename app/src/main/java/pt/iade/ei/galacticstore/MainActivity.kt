@@ -44,6 +44,7 @@
     import androidx.compose.ui.tooling.preview.Preview
     import androidx.compose.ui.unit.dp
     import androidx.compose.ui.unit.sp
+    import pt.iade.ei.galacticstore.models.GameItem
     import pt.iade.ei.galacticstore.ui.components.GameCardItem
     import pt.iade.ei.galacticstore.ui.components.NavBarItem
     import pt.iade.ei.galacticstore.ui.theme.GalacticStoreTheme
@@ -64,8 +65,33 @@
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun GameListView() {
-        // todo : add description to the top app bar icons
-
+        val item = GameItem(
+            gameImage = R.drawable.where_the_wind_meet,
+            gameName = "Where winds meet",
+            gameDescription = "Where Winds Meet is an epic Wuxia open-world action-adventure RPG set in ancient China at the tenth century. Players will assume the role of a young sword master as they embark on a journey to uncover the mysteries of their own identity.",
+            gameItemName = "helm",
+            itemDescription = "Helms reduce the damage dealt to the players' head. Helms can be upgraded for an amount of coins or gems. Upgrades increase the head defense of helms. There are two types of helms; standard and super helms",
+            itemPrice = "24.99 £",
+            itemImage = R.drawable.helm
+        )
+        val item1 = GameItem(
+            gameImage = R.drawable.halo_the_master_chief_collection,
+            gameName = "Halo",
+            gameDescription = "The Master Chief’s iconic journey includes six games, built for PC and collected in a single integrated experience. Whether you’re a long-time fan or meeting Spartan 117 for the first time, The Master Chief Collection is the definitive Halo gaming experience.",
+            gameItemName = "Halo Reach",
+            itemDescription = "Halo: Reach comes to PC as the first installment of Halo: The Master Chief Collection. Now optimized for PC, experience the heroic story of Noble Team, a group of Spartans, who through great sacrifice and courage, saved countless lives in the face of impossible odds.",
+            itemPrice = "9.99",
+            itemImage = R.drawable.halo_reach
+        )
+        val item3 = GameItem(
+            gameImage = R.drawable.marvel_rivals,
+            gameName = "Marvel Rivals",
+            gameDescription = "Marvel Rivals is a Super Hero Team-Based PVP Shooter! Assemble an all-star Marvel squad, devise countless strategies by combining powers to form unique Team-Up skills and fight in destructible, ever-changing battlefields across the continually evolving Marvel universe!",
+            gameItemName = "Daredevill",
+            itemDescription = "Daredevill is a super able human who got blind while he was a child",
+            itemPrice = "9.99",
+            itemImage = R.drawable.marvel_rivals
+        )
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -78,17 +104,16 @@
                         horizontalArrangement = Arrangement.End){
                         IconButton(onClick = {}) {
                             Icon(painter = painterResource(R.drawable.outline_notifications_icon),
-                                contentDescription = "")
+                                contentDescription = "Notifications icon")
                         }
                         Spacer(modifier = Modifier.width(5.dp))
                         IconButton(
                             onClick = {}
                         ) {
                             Icon(painter = painterResource(R.drawable.outline_settings_icon),
-                                contentDescription = "")
+                                contentDescription = "Settings icon")
                         }
-                        }
-                            },
+                        } },
                 )
             },
             bottomBar = {
@@ -126,6 +151,7 @@
                    // .background(color = Color(0xFF2be4dc))
                  // work on another backround color 
             ){
+                // created function gameBanner
                 // review later
                 Spacer(modifier = Modifier.height(30.dp))
                 Row {
@@ -136,11 +162,11 @@
                     )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
-                GameCard()
+                GameCard(gameName = item.gameName, gameImage = item.gameImage)
                 Spacer(modifier = Modifier.height(4.dp))
-                GameCard()
+                GameCard(gameImage = item1.gameImage, gameName = item1.gameName)
                 Spacer(modifier = Modifier.height(4.dp))
-                GameCard()
+                GameCard(gameName = item3.gameName, gameImage = item3.gameImage)
             }
         }
     }
@@ -155,6 +181,13 @@
         }
     }
 
+    @Composable
+    fun gameBanner(){
+        Card {
+            Image(painter = painterResource(R.drawable.marvel_rivals),
+                contentDescription = "")
+        }
+    }
 
     // card for the games
     // i might not need this preview since i directly call it up there
@@ -195,7 +228,7 @@
     @Composable
     fun GameCardPreview(){
         GalacticStoreTheme {
-           GameCard(gameName = gameItem.gameName,
-               gameImage = gameItem.game)
+           GameCard(gameImage = R.drawable.halo_the_master_chief_collection,
+               gameName = "Hallo, the master chief collection")
         }
     }
