@@ -132,7 +132,7 @@ fun GameDetailView() {
                     )
         ){
             Row {
-                GameCardItem()
+                test010()
             }
             Row {
                 Text("Purchasable Items",
@@ -149,7 +149,27 @@ fun GameDetailView() {
         }
     }
 }
+// testing something
+@Composable
+fun test010(){
+    Card (
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xF3EDF7)
+        )
+    ){
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(painter = painterResource(R.drawable.where_the_wind_meet),
+                contentDescription = "")
 
+            Text("pequena descrição do jogo")
+        }
+    }
+
+}
+
+
+
+//function that contains the items
 // change function's name
 @Composable
 fun GameCheck(){
@@ -188,7 +208,6 @@ fun GameCheck(){
         }
 
     }
-
 }
 
 
