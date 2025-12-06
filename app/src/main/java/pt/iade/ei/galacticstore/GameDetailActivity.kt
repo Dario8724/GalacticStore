@@ -96,83 +96,72 @@ fun GameDetailView() {
                 },
             )
         },
-        bottomBar = {
-            BottomAppBar(
-            ) {
-                Row (modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    NavBarItem(
-                        barIcon = R.drawable.featured_icon ,
-                        label = "Featured",
-                        onclick = {}
-                    )
-                    NavBarItem(
-                        barIcon = R.drawable.history_icon,
-                        label = "History",
-                        onclick = {}
-                    )
-                    NavBarItem(
-                        barIcon = R.drawable.profile_icon,
-                        label = " Prolfile",
-                        onclick = {}
-                    )
-                }
-            }
-
-        },
 
         ) { innerPadding ->
         Column (
-            modifier = Modifier
+            modifier = Modifier.padding(all = 8.dp)
             //  .background(color = Color.Black)
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState()
                     )
         ){
             Row {
-                test010()
+                DescriptionCard()
             }
             Row {
                 Text("Purchasable Items",
                     fontSize = 30.sp,
-                    modifier = Modifier.padding(start = 10.dp)
+
                 )
             }
             // add diferent images here on the items
-            GameCheck()
+            PurchasableItemCard()
             Spacer(modifier = Modifier.height(10.dp))
-            GameCheck()
+            PurchasableItemCard()
             Spacer(modifier = Modifier.height(10.dp))
-            GameCheck()
+            PurchasableItemCard()
         }
     }
 }
 // testing something
 @Composable
-fun test010(){
+fun DescriptionCard(
+    // this here receives an game image and a game  description
+){
     Card (
+       modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xF3EDF7)
         )
     ){
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(painter = painterResource(R.drawable.where_the_wind_meet),
-                contentDescription = "")
+            Column {
+                Box(){
+                    Image(painter = painterResource(R.drawable.where_the_wind_meet),
+                        contentDescription = "",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.size(130.dp)
+                            .clip(
+                                shape = RoundedCornerShape(12.dp)
+                            ))
+                }
+            }
+            Spacer(modifier = Modifier.width(10.dp))
+            Column (){
+                Text("Esse jogo é a melhor coisa já criada nesse mundo ")
+            }
 
-            Text("pequena descrição do jogo")
         }
     }
 
 }
 
 
-
+// fix now
 //function that contains the items
 // change function's name
 @Composable
-fun GameCheck(){
+fun PurchasableItemCard(){
     Card(
         colors = CardDefaults.cardColors(
                 containerColor = Color.White
@@ -184,7 +173,7 @@ fun GameCheck(){
                     contentDescription = "",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.clip(RoundedCornerShape(16.dp))
-                        .size(150.dp, 150.dp))
+                        .size(150.dp, 110.dp))
             }
             Column (modifier = Modifier.padding(all = 6.dp)){
                 Row {
@@ -225,6 +214,6 @@ fun GameDetailActivityPreview() {
 @Composable
 fun GameCheckPreviw(){
     GalacticStoreTheme {
-        GameCheck()
+        PurchasableItemCard()
     }
 }
