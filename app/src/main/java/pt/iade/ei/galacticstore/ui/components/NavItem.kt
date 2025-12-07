@@ -29,9 +29,9 @@ import pt.iade.ei.galacticstore.ui.theme.GalacticStoreTheme
 fun NavBarItem (
     @DrawableRes barIcon : Int,
     label : String,
-    onclick : () -> Unit = {}
+    onclick : () -> Unit = {},
 ){
-
+    // add selection identifier
             Button(
                 onClick = onclick,
                 colors = ButtonDefaults.buttonColors(
@@ -79,25 +79,6 @@ fun NavBarItem (
         }
      }
  }
-// empty
-
-@Composable
-fun Dario(){
-    Card(onClick = {},
-        modifier = Modifier.fillMaxWidth()) {
-
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DarioPreview(){
-    MaterialTheme {
-        Dario()
-    }
-}
-
-
 
 @Preview(showBackground = true)
 @Composable

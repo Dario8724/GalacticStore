@@ -1,6 +1,5 @@
 package pt.iade.ei.galacticstore.ui.components
 
-import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -14,14 +13,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -32,31 +26,21 @@ import androidx.compose.ui.unit.sp
 import pt.iade.ei.galacticstore.R
 import pt.iade.ei.galacticstore.ui.theme.GalacticStoreTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Test(){
-    ModalBottomSheet(onDismissRequest = {},
-     sheetState = rememberModalBottomSheetState()
-    ) {
-        BottomSheetContent(R.drawable.helm,12.99)
-    }
-}
-
-@Composable
-fun BottomSheetContent(
+fun PurchasableItemCard(
     @DrawableRes itemImage : Int,
+    itemName : String,
+    itemDescription : String,
     itemPrice : Double
 ){
     Card(
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp,
+            pressedElevation = 8.dp),
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         )
     ) {
-        Row (modifier = Modifier.padding(start = 4.dp)){
-            Text("Item name",
-                fontSize = 30.sp,
-            )
-        }
         Row(modifier = Modifier.fillMaxWidth()) {
             Column {
                 Box() {
@@ -68,18 +52,22 @@ fun BottomSheetContent(
                 }
             }
             Column (modifier = Modifier.padding(all = 6.dp)){
-
                 Row {
-                    Text("Here goes a little description of the item where its a bit more detailed")
+                    Text(itemName,
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
-                // research about truncated content
+                Row {
+                    Text(itemDescription)
+                }
                 Row(modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                   ) {
-                    Text("$" + itemPrice)
-                    Button(onClick = {} ) {
+                    horizontalArrangement = Arrangement.End) {
+                    Button(
+                        // add navigation later
+                        onClick = {} ) {
                         Text(
-                            "Buy with 1 -click"
+                            "$ " + itemPrice.toString()
                         )
                     }
                 }
@@ -90,9 +78,11 @@ fun BottomSheetContent(
 }
 
 
-@Preview
+// preview
+@Preview(showBackground = true)
 @Composable
-fun TestPreview (){
+fun PurchasableItemCardPreviw(){
     GalacticStoreTheme {
-        BottomSheetContent(R.drawable.helm,12.99)    }
+        PurchasableItemCard(itemImage = R.drawable.helm,"Helm","This is a helm said to have belonged to emperor Zhu Wen", itemPrice = 12.99)
+    }
 }

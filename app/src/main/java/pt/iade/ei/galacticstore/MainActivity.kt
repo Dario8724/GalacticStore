@@ -45,7 +45,7 @@
     import androidx.compose.ui.unit.dp
     import androidx.compose.ui.unit.sp
     import pt.iade.ei.galacticstore.models.GameItem
-    import pt.iade.ei.galacticstore.ui.components.GameCardItem
+    import pt.iade.ei.galacticstore.ui.components.GameCard
     import pt.iade.ei.galacticstore.ui.components.NavBarItem
     import pt.iade.ei.galacticstore.ui.theme.GalacticStoreTheme
 
@@ -181,54 +181,3 @@
         }
     }
 
-    @Composable
-    fun gameBanner(){
-        Card {
-            Image(painter = painterResource(R.drawable.marvel_rivals),
-                contentDescription = "")
-        }
-    }
-
-    // card for the games
-    // i might not need this preview since i directly call it up there
-    @Composable
-    fun GameCard(
-        gameName : String,
-        @DrawableRes gameImage : Int
-    ){
-        Card(
-            onClick = {},
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(16.dp)
-            )
-        {
-            Box(
-// add configuration of the box here
-            ){
-
-                Image(
-                    painter = painterResource(gameImage),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxWidth()
-                        .height(200.dp)
-                )
-                Column(modifier = Modifier.align(Alignment.BottomStart)
-                ) {
-                    Text(
-                        text = gameName,
-                        color = Color.White,
-                        fontSize = 30.sp)
-                }
-                }
-            }
-        }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun GameCardPreview(){
-        GalacticStoreTheme {
-           GameCard(gameImage = R.drawable.halo_the_master_chief_collection,
-               gameName = "Hallo, the master chief collection")
-        }
-    }
