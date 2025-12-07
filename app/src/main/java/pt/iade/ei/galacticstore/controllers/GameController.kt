@@ -33,13 +33,15 @@ class GameController {
                  PurchasableItem( R.drawable.magic_amulet,"Moon amulet","Gain the ability to be invisible by equipping this amulet", itemPrice = 15.95)
              )
             "Halo"  -> listOf(
-                PurchasableItem( R.drawable.halo_reach,"Halo: Reach","Experience the heroic story of Noble Team, a group of Spartans, who through great sacrifice and courage.", itemPrice = 12.99),
-
-
+                PurchasableItem( R.drawable.halo_reach,"Halo: Reach","Experience the heroic story of Noble Team, a group of Spartans, who through great sacrifice and courage.", itemPrice = 34.95),
+                PurchasableItem( R.drawable.master_chief_armor,"John-117","Master Chief Petty Officer John-117, a super-soldier of the UNSC's Spartan program", itemPrice = 18.50),
+                PurchasableItem( R.drawable.hornet_skin,"Hornet skin - Black Rhine","Get the exact location of your enemies for 5 seconds with heat sensors", itemPrice = 3.99),
                 )
             "Marvel Rivals"  -> listOf(
-
-            )
+                PurchasableItem( R.drawable.gambit,"Gambit","Experience the heroic story of Noble Team, a group of Spartans, who through great sacrifice and courage.", itemPrice = 15.99),
+                PurchasableItem( R.drawable.daredevil,"Daredevil","Experience the heroic story of Noble Team, a group of Spartans, who through great sacrifice and courage.", itemPrice = 15.99),
+                PurchasableItem( R.drawable.blade,"Blade","Blade is depicted as having all of a vampire strength and none of the weakness", itemPrice = 19.99),
+                )
             // might need to change
             else -> emptyList()
         }
