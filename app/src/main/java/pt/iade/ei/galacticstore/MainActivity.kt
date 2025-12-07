@@ -5,7 +5,6 @@
     import androidx.activity.ComponentActivity
     import androidx.activity.compose.setContent
     import androidx.activity.enableEdgeToEdge
-
     import androidx.compose.foundation.layout.Arrangement
     import androidx.compose.foundation.layout.Column
     import androidx.compose.foundation.layout.Row
@@ -127,7 +126,6 @@
                     .verticalScroll(rememberScrollState())
 
             ){
-
                 Spacer(modifier = Modifier.height(30.dp))
                 Row {
                     Text(
