@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -75,58 +76,55 @@ fun GameDetailView() {
                 colors = topAppBarColors(
                     containerColor = Color(0xF3EDF7),
                 ),
-                // fix later
                 title = {
                     Row (
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceEvenly
-                        //horizontalArrangement = Arrangement.End
                         )
                     {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = ""
+                            contentDescription = "Voltar"
                         )
-                        Text("Game's name"
-                        )
+                        Text("Game's name")
                          Icon(painter = painterResource(R.drawable.favorite_icon),
-                             contentDescription = "")
+                             contentDescription = "Add to favorites")
                     }
                 },
             )
-        },
-
+        }
         ) { innerPadding ->
         Column (
             modifier = Modifier.padding(all = 8.dp)
-            //  .background(color = Color.Black)
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState()
                     )
         ){
             Row {
-                DescriptionCard()
+                DescriptionCard(gameImage = R.drawable.where_the_wind_meet, gameDescription = "Where Winds Meet is an epic Wuxia open-world action-adventure RPG set in ancient China at the tenth century.")
             }
+            Spacer(modifier = Modifier.height(10.dp))
             Row {
                 Text("Purchasable Items",
                     fontSize = 30.sp,
-
                 )
             }
+            Spacer(modifier = Modifier.height(10.dp))
             // add diferent images here on the items
-            PurchasableItemCard()
+            PurchasableItemCard(itemImage = R.drawable.helm,"Helm","This is a helm said to have belonged to emperor Zhu Wen", itemPrice = 12.99)
             Spacer(modifier = Modifier.height(10.dp))
-            PurchasableItemCard()
+           // PurchasableItemCard()
             Spacer(modifier = Modifier.height(10.dp))
-            PurchasableItemCard()
+           // PurchasableItemCard()
         }
     }
 }
-// testing something
+
 @Composable
 fun DescriptionCard(
-    // this here receives an game image and a game  description
+@DrawableRes gameImage : Int,
+    gameDescription : String
 ){
     Card (
        modifier = Modifier.fillMaxWidth(),
@@ -137,59 +135,66 @@ fun DescriptionCard(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column {
                 Box(){
-                    Image(painter = painterResource(R.drawable.where_the_wind_meet),
+                    Image(painter = painterResource(gameImage),
                         contentDescription = "",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.size(130.dp)
                             .clip(
-                                shape = RoundedCornerShape(12.dp)
+                                shape = RoundedCornerShape(16.dp)
                             ))
                 }
             }
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(14.dp))
             Column (){
-                Text("Esse jogo é a melhor coisa já criada nesse mundo ")
+                Text(gameDescription)
             }
-
         }
     }
-
 }
 
 
-// fix now
-//function that contains the items
-// change function's name
+
+// this function receives an item's image , a description of the item and its price
 @Composable
-fun PurchasableItemCard(){
+fun PurchasableItemCard(
+    @DrawableRes itemImage : Int,
+    itemName : String,
+    itemDescription : String,
+    itemPrice : Double
+){
     Card(
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp,
+            pressedElevation = 8.dp),
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
                 containerColor = Color.White
         )
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Column {
-                Image(painter = painterResource(R.drawable.helm),
+                Box() {
+                    Image(painter = painterResource(itemImage),
                     contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.clip(RoundedCornerShape(16.dp))
-                        .size(150.dp, 110.dp))
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.size(130.dp)
+                    )
+                }
             }
             Column (modifier = Modifier.padding(all = 6.dp)){
                 Row {
-                    Text("Item name",
-                        fontSize = 30.sp,
+                    Text(itemName,
+                        fontSize = 25.sp,
                        // fontWeight = FontWeight.Black
                     )
                 }
                Row {
-                   Text("Here goes a little description of the item")
+                   Text(itemDescription)
                }
                 Row(modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End) {
                     Button(onClick = {} ) {
                         Text(
-                            "$ 12.99 "
+                            "$ " + itemPrice.toString()
                         )
                     }
                 }
@@ -214,6 +219,6 @@ fun GameDetailActivityPreview() {
 @Composable
 fun GameCheckPreviw(){
     GalacticStoreTheme {
-        PurchasableItemCard()
+       // PurchasableItemCard()
     }
 }
