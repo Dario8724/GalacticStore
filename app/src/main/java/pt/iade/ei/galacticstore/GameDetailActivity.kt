@@ -29,6 +29,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import pt.iade.ei.galacticstore.controllers.GameController
+import pt.iade.ei.galacticstore.models.PurchasableItem
 import pt.iade.ei.galacticstore.ui.components.DescriptionCard
 import pt.iade.ei.galacticstore.ui.components.PurchasableItemCard
 
@@ -38,9 +40,25 @@ class GameDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        var gameName = intent.getStringExtra("gameName") ?: return
+        var gameImage = intent.getIntExtra("gameImage", -1)
+        var gameDescription = intent.getStringExtra("gameDescription") ?: ""
+
+        // buscar items
+        var controller = GameController()
+        var items = controller.getGameItem(gameName)
         setContent {
+
             GalacticStoreTheme {
-                            }
+                // todo : make it able to fetch info
+                GameDetailView(
+                    gameName = gameName,
+                    gameImage = gameImage,
+                    gameDescription = gameDescription,
+                    items = items
+                )
+            }
         }
     }
 }
@@ -48,9 +66,13 @@ class GameDetailActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GameDetailView() {
-    // todo : add description to the top app bar icons
-    Scaffold(
+fun GameDetailView(
+    gameName : String,
+    gameImage : Int,
+    gameDescription : String,
+    items : List<PurchasableItem>
+) {
+        Scaffold(
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
@@ -67,7 +89,7 @@ fun GameDetailView() {
                             Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Voltar"
                         )
-                        Text("Game's name")
+                        Text(gameName)
                          Icon(painter = painterResource(R.drawable.favorite_icon),
                              contentDescription = "Add to favorites")
                     }
@@ -82,7 +104,9 @@ fun GameDetailView() {
                     )
         ){
             Row {
-                DescriptionCard(gameImage = R.drawable.where_the_wind_meet, gameDescription = "Where Winds Meet is an epic Wuxia open-world action-adventure RPG set in ancient China at the tenth century.")
+                // change later
+                DescriptionCard(gameImage = gameImage, gameDescription = gameDescription)
+                //DescriptionCard(gameImage = R.drawable.where_the_wind_meet, gameDescription = "Where Winds Meet is an epic Wuxia open-world action-adventure RPG set in ancient China at the tenth century.")
             }
             Spacer(modifier = Modifier.height(10.dp))
             Row {
@@ -92,11 +116,14 @@ fun GameDetailView() {
             }
             Spacer(modifier = Modifier.height(10.dp))
             // add diferent images here on the items
-            PurchasableItemCard(itemImage = R.drawable.helm,"Helm","This is a helm said to have belonged to emperor Zhu Wen", itemPrice = 12.99)
-            Spacer(modifier = Modifier.height(10.dp))
-            PurchasableItemCard( R.drawable.range_weapon,"Range Weapon","Inflict more damage on your enemy with this range weapon", itemPrice = 5.99)
-            Spacer(modifier = Modifier.height(10.dp))
-            PurchasableItemCard( R.drawable.magic_amulet,"Magic amulet","Gain the ability to be invisible by equipping this amulet", itemPrice = 15.95)
+            for (item in items){
+                PurchasableItemCard(
+                    itemImage = item.itemImage,
+                    itemName = item.itemName,
+                    itemDescription = item.itemDescription,
+                    itemPrice = item.itemPrice
+                )
+            }
         }
     }
 }
@@ -105,6 +132,16 @@ fun GameDetailView() {
 @Composable
 fun GameDetailActivityPreview() {
     GalacticStoreTheme {
-        GameDetailView()
+        GameDetailView(
+            gameName = "Halo",
+            gameImage = R.drawable.halo_the_master_chief_collection,
+            // change game description
+            gameDescription = "Master Chief's legandary journey",
+            items = listOf(
+                PurchasableItem( R.drawable.halo_reach,"Halo: Reach","Experience the heroic story of Noble Team, a group of Spartans, who through great sacrifice and courage.", itemPrice = 34.95),
+                PurchasableItem( R.drawable.master_chief_armor,"John-117","Master Chief Petty Officer John-117, a super-soldier of the UNSC's Spartan program", itemPrice = 18.50),
+                PurchasableItem( R.drawable.hornet_skin,"Hornet skin - Black Rhine","Get the exact location of your enemies for 5 seconds with heat sensors", itemPrice = 3.99),
+            )
+        )
     }
 }

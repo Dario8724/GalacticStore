@@ -1,5 +1,6 @@
 package pt.iade.ei.galacticstore.ui.components
 
+import android.content.Intent
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -19,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import pt.iade.ei.galacticstore.GameDetailActivity
 import pt.iade.ei.galacticstore.R
 import pt.iade.ei.galacticstore.ui.theme.GalacticStoreTheme
 
@@ -29,7 +31,11 @@ fun GameCard(
     @DrawableRes gameImage : Int
 ){
     Card(
-        onClick = {},
+        onClick = {val intent = Intent(context, GameDetailActivity::class.java)
+                  intent.putExtra("gameName", gameName)
+                  intent.putExtra("gameImage", gameImage)
+                  intent.putExtra("gameDescription", gameDescription)
+        },
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp)
     )
