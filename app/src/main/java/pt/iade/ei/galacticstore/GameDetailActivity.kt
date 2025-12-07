@@ -41,13 +41,13 @@ class GameDetailActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        var gameName = intent.getStringExtra("gameName") ?: return
-        var gameImage = intent.getIntExtra("gameImage", -1)
-        var gameDescription = intent.getStringExtra("gameDescription") ?: ""
+        val gameName = intent.getStringExtra("gameName") ?: return
+        val gameImage = intent.getIntExtra("gameImage", -1)
+        val gameDescription = intent.getStringExtra("gameDescription") ?: ""
 
         // buscar items
-        var controller = GameController()
-        var items = controller.getGameItem(gameName)
+        val controller = GameController()
+        val items = controller.getGameItem(gameName)
         setContent {
 
             GalacticStoreTheme {

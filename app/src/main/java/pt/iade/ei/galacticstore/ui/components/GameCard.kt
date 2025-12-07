@@ -28,14 +28,11 @@ import pt.iade.ei.galacticstore.ui.theme.GalacticStoreTheme
 @Composable
 fun GameCard(
     gameName : String,
-    @DrawableRes gameImage : Int
+    @DrawableRes gameImage : Int,
+    onclick : () -> Unit = {}
 ){
     Card(
-        onClick = {val intent = Intent(context, GameDetailActivity::class.java)
-                  intent.putExtra("gameName", gameName)
-                  intent.putExtra("gameImage", gameImage)
-                  intent.putExtra("gameDescription", gameDescription)
-        },
+        onClick = onclick,
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp)
     )
